@@ -1,0 +1,26 @@
+port_scan.py-
+*Currently only works on Linux because some of the Python modules are not available in Windows.
+*Requires the following Python Modules - logging, scapy, sys, getopt, re, and netaddr.
+*Use on commandline in Linux to run ICMP, UDP, or TCP scans as well as traceroutes.
+*Command has to be run from folder the script is located in, or else the entire path to the script will have to be used.
+*Will require either root access or sudo to run scanner for packet creation.
+flags - 
+-s target IP address(es) - can be an individual value, a comma separated list with no spaces (i.e. - 111.111.111.111,222.222.222.222,333.333.333.333),
+  a range (i.e. - 111.111.111.111-150), or a subnet using CIDR addressing (i.e. - 111.111.111.0/24).
+
+-p target port(s) - can be an individual value, a comma separated list with no spaces (i.e. - 22,23,50,111,8080),
+  or a range (i.e. - 1-150).
+  
+-h help for tool showing syntax and flags
+
+-i ICMP scan, example use - python port_scan.py -i -s <target IP address(es)>
+  *Returns list of live hosts
+
+-T traceroute, example use - python port_scan.py -T -s <target IP address(es)>
+  *Runs ICMP scan to find live hosts then returns traceroute results for all live hosts
+
+-t TCP scan, example use - python port_scan.py -t -s <target IP address(es)> -p <target port(s)>
+  *Runs ICMP scan to find live hosts then runs through selected TCP ports checking for open ports on all live hosts and returns list of live hosts and open ports
+
+-u UDP scan, example use - python port_scan.py -u -s <target IP address(es)> -p <target port(s)>
+  *Runs ICMP scan to find live hosts then runs through selected UDP ports checking for open ports on all live hosts and returns list of live hosts and any ports that are not closed
